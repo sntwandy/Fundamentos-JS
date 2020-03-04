@@ -18,13 +18,15 @@ let wandy = {
 }
 
 const isHeigth = ({ heigth }) => heigth >= 1.8
+// const notHeigth = ({ heigth }) => heigth < 1.8
 
 let people =  [megan, zeus, wandy]
 
-/* let heigthPeople = people.filter(function ({ heigth }) {
-    return heigth > 1.8
-}) */
+let notHeigthPeople = people.filter(function ({ heigth }) {
+    return heigth < 1.8
+}) 
 
 let heigthPeople = people.filter(isHeigth)
 
 console.log(heigthPeople)
+console.log(notHeigthPeople)
