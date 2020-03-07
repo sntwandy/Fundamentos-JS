@@ -48,6 +48,6 @@ Developer.prototype.iWork = function () {
 }
 
 // CREATING PROTOTYPE 
-let megan = new Person('Megan', 'Herrera', 1.65)
+/* let megan = new Person('Megan', 'Herrera', 1.65)
 let wandy = new Person('Wandy', 'Santana', 1.78)
-let zeus = new Developer('Zeus', 'Santana', 'Python')
+let zeus = new Developer('Zeus', 'Santana', 'Python') */
