@@ -53,3 +53,8 @@ console.log(people)
 // console.log(notHeigthPeople)
 // console.log(peopleCms)
 console.log(peopleCms1)
+
+// EXERCISE WITH REDUCE
+/* let reducerFnt = (acum, people) => acum + people.heigth
+
+let heigthReduce = people.reduce(reducerFnt, 0) */
