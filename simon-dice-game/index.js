@@ -9,10 +9,26 @@ const orange = document.getElementById('orange')
 class Game{
     constructor(){
         this.initializar()
+        this.generateSecuence()
     }
 
     initializar(){
         btnStart.classList.add('hide')
+        this.level = 1
+        this.colors = {
+            /* purple: purple,
+            red: red,
+            yellow: yellow,
+            orange: orange */
+            purple,
+            red,
+            yellow,
+            orange
+        }
+    }
+
+    generateSecuence(){
+        this.secuence = new Array(10).fill(0).map(() => Math.floor(Math.random() * 4))
     }
 }
 
@@ -20,4 +36,5 @@ class Game{
 function startGame(){
     alert('The game will start!! ;)')
     let game = new Game()
+    console.log(game)
 }
