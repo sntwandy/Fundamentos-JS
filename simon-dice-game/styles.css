@@ -1,0 +1,78 @@
+body{
+    display: flex;
+    background-color: #dedede;
+    height: 100vh;
+}
+
+.gameboard{
+    height: 100vh;
+    width: 100vw;
+    border-radius: 50%;
+    max-width: 60vw;
+    max-height: 60vh;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 200PX;
+}
+
+.color{
+    display: inline-block;
+    width: 50%;
+    height: 50%;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.purple{
+    background-color: rgba(128, 0, 128, 1);
+}
+
+.purple.light{
+    background-color: rgba(128, 0, 128, 0.5);
+}
+
+.red{
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.red.light{
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.yellow{
+    background-color: rgba(255, 255, 0, 1);
+}
+
+.yellow.light{
+    background-color: rgba(255, 255, 0, 0.5);
+}
+
+.orange{
+    background-color: rgba(255, 165, 0, 1);
+}
+
+.orange.light{
+    background-color: rgba(255, 165, 0, 0.5);
+}
+
+.btnStart{
+    width: 400px;
+    height: 100px;
+    background-color: #ecf0f1;
+    color:#2c3e50;
+    font-size: 2.5rem;
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 200px);
+    border-radius: 10px;    
+}
+
+.hide{
+    display: none;
+}
