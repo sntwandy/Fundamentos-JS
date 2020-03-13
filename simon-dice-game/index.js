@@ -10,16 +10,13 @@ class Game{
     constructor(){
         this.initializar()
         this.generateSecuence()
+        this.nextLevel()
     }
 
     initializar(){
         btnStart.classList.add('hide')
         this.level = 1
         this.colors = {
-            /* purple: purple,
-            red: red,
-            yellow: yellow,
-            orange: orange */
             purple,
             red,
             yellow,
@@ -28,13 +25,58 @@ class Game{
     }
 
     generateSecuence(){
-        this.secuence = new Array(10).fill(0).map(() => Math.floor(Math.random() * 4))
+        this.secuence = new Array(10).fill(0).map(n => Math.floor(Math.random() * 4))
+    }
+
+    nextLevel(){
+        this.lightSecuence()
+        this.addClickEvents()
+    }
+
+    transformFromNumberToColor(n){
+        switch(n){
+            case 0: 
+                return 'purple'
+            case 1: 
+                return 'red'
+            case 2: 
+                return 'yellow'
+            case 3: 
+                return 'orange'
+        }
+    }
+
+    lightSecuence(){
+        for(let i = 0; i < this.level; i++){
+            const color = this.transformFromNumberToColor(this.secuence[i])
+            setTimeout(() => this.iluminateColor(color), 1000 * i);
+        }
+    }
+
+    iluminateColor(color){
+        this.colors[color].classList.add('light')
+        setTimeout(() => this.TurnOffColor(color), 350)
+    }
+
+    TurnOffColor(color){
+        this.colors[color].classList.remove('light')
+    }
+
+    addClickEvents(){
+        this.colors.purple.addEventListener('click', this.chooseColor.bind(this))
+        this.colors.red.addEventListener('click', this.chooseColor.bind(this))
+        this.colors.yellow.addEventListener('click', this.chooseColor.bind(this))
+        this.colors.orange.addEventListener('click', this.chooseColor.bind(this))
+    }
+
+    chooseColor(ev){
+        console.log(this)
     }
 }
 
 // START GAME
 function startGame(){
     alert('The game will start!! ;)')
-    let game = new Game()
+    window.game = new Game()
     console.log(game)
 }
