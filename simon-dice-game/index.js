@@ -4,18 +4,22 @@ const purple = document.getElementById('purple')
 const red = document.getElementById('red')
 const yellow = document.getElementById('yellow')
 const orange = document.getElementById('orange')
+const LAST_LEVEL = 10
 
 // GAME CLASS
 class Game{
     constructor(){
         this.initializar()
         this.generateSecuence()
-        this.nextLevel()
+        setTimeout(()=>{
+            this.nextLevel()
+        }, 500)
     }
 
     initializar(){
-        btnStart.classList.add('hide')
+        this.initializar = this.initializar.bind(this)
         this.level = 1
+        this.toggleStart()
         this.colors = {
             purple,
             red,
@@ -24,17 +28,27 @@ class Game{
         }
     }
 
+    toggleStart(){
+        if(btnStart.classList.contains('hide')){
+            btnStart.classList.remove('hide')
+        }
+        else{
+            btnStart.classList.add('hide')
+        }
+    }
+
     generateSecuence(){
-        this.secuence = new Array(10).fill(0).map(n => Math.floor(Math.random() * 4))
+        this.secuence = new Array(LAST_LEVEL).fill(0).map(n => Math.floor(Math.random() * 4))
     }
 
     nextLevel(){
-        this.lightSecuence()
-        this.addClickEvents()
+        this.subLevel = 0;
+        this.lightSecuence();
+        this.addClickEvents();
     }
 
-    transformFromNumberToColor(n){
-        switch(n){
+    transformFromNumberToColor(number){
+        switch(number){
             case 0: 
                 return 'purple'
             case 1: 
@@ -43,6 +57,19 @@ class Game{
                 return 'yellow'
             case 3: 
                 return 'orange'
+        }
+    }
+
+    transformFromColorToNumber(color){
+        switch(color){
+            case 'purple': 
+                return 0
+            case 'red': 
+                return 1
+            case 'yellow': 
+                return 2
+            case 'orange': 
+                return 3
         }
     }
 
@@ -69,14 +96,56 @@ class Game{
         this.colors.orange.addEventListener('click', this.chooseColor.bind(this))
     }
 
+    removeClickEvents(){
+        this.colors.purple.removeEventListener('click', this.chooseColor.bind(this))
+        this.colors.red.removeEventListener('click', this.chooseColor.bind(this))
+        this.colors.yellow.removeEventListener('click', this.chooseColor.bind(this))
+        this.colors.orange.removeEventListener('click', this.chooseColor.bind(this))
+    }
+
     chooseColor(ev){
-        console.log(this)
+        const colorName = ev.target.dataset.color
+        const colorNumber = this.transformFromColorToNumber(colorName)
+        this.iluminateColor(colorName)
+
+        if(colorNumber === this.secuence[this.subLevel]){
+            this.subLevel++
+        
+            if(this.subLevel === this.level){
+                this.level++
+                this.removeClickEvents()
+                if(this.level === LAST_LEVEL + 1){
+                    // Won!
+                    this.wonGame()
+                }
+                else {
+                   setTimeout(this.nextLevel.bind(this), 1500)
+                }
+            } 
+        } 
+        else {
+            // Loose!
+            this.youLoose()
+        }
+    
+    }
+
+    wonGame(){
+        swal('Congratulations', 'You won the game', 'success')
+            .then(() => this.initializar())
+    }
+
+    youLoose(){
+        swal('I am so sorry', 'You loose the game', 'error')
+            .then(() => {
+                this.removeClickEvents()
+                this.initializar()
+            })
     }
 }
 
 // START GAME
 function startGame(){
-    alert('The game will start!! ;)')
     window.game = new Game()
     console.log(game)
 }
